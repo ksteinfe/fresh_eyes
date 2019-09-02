@@ -1,0 +1,22 @@
+input_features:
+  -
+    name: image_path
+    type: image
+    encoder: stacked_cnn
+  -
+    name: box_halfwidth
+    type: numerical
+  -
+    name: box_halfdepth
+    type: numerical
+  -
+    name: box_height
+    type: numerical
+
+output_features:
+  -
+    name: label
+    type: category
+
+training:
+    batch_size: 50
