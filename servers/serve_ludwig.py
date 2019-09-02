@@ -66,7 +66,7 @@ def predict():
 
     ## DO PREDICTION
     pred_data = fe.serve.post_to_pred_template(post_data, FEAS_IN)
-    print(pred_data)
+    #print(pred_data)
     prediction = do_predict(MODL, pred_data)
     if not prediction: return "prediction failed. maybe try again? it could work next time.", 500
     fe.util.clear_temp_path()
@@ -101,10 +101,13 @@ def do_predict(mdl, pred_data):
 def do_format_response(prediction):
     response = {}
     for fea in FEAS_OUT:
+        print("working out a response for feature {}".format(fea['name']))
         resp_fea = {}
         if fea['name'] not in prediction:
             print("I expected to find a feature named {} in the prediction, but did not.".format(fea['name']))
             continue
+
+
 
         if fea['type'] == "category":
             resp_fea['prediction'] = prediction[fea['name']]['predictions'][0]
@@ -118,10 +121,10 @@ def do_format_response(prediction):
                 category_name = fea['meta']['idx2str'][idx]
                 resp_fea['probabilities'][category_name] = round(val,ROUND_FLOATS_TO)
 
-        if fea['type'] == "numerical":
+        elif fea['type'] == "numerical":
             # ksteinfe: SUPER FUCKING HACKY
             # print(prediction)
-            resp_fea = float(prediction['label']['predictions'][0])
+            resp_fea = float(prediction[fea['name']]['predictions'][0])
 
         else:
             print("I don't know how to handle features of type {}, so cannot process the feature named {}".format(fea['type'],fea['name']))
