@@ -9,7 +9,7 @@ def main(pth_src):
 
     buffered = BytesIO()
     img.save(buffered, format="JPEG")
-    img_str = str(base64.b64encode(buffered.getvalue()))
+    img_str = str(base64.b64encode(buffered.getvalue()).decode())
 
     pth_save = os.path.join(os.path.dirname(os.path.abspath(pth_src)), '{}.json'.format(bse))
     with open(pth_save, 'w') as fp:
