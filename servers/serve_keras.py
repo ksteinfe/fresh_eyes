@@ -80,6 +80,7 @@ def do_format_response(prediction):
     for k in response:
         best = max(response[k].items(), key=operator.itemgetter(1))
         print("{} looks {:.2%} like a {}".format(k,best[1]/100,best[0]))
+    return response
 
 if __name__ == '__main__':
     cfg = fe.util.load_config('KERAS')
