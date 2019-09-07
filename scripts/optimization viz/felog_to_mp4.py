@@ -153,23 +153,32 @@ def viewport_frames(log_data, name, im_size):
 
 
 
+if __name__ == '__main__' and __package__ is None:
+    # ---- FEUTIL ---- #
+    from os import sys, path
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__)))) # add grandparent folder to the module search path
+    import _fresh_eyes_script_utilities as feu # import fresh eyes fe_util
+    # ---- FEUTIL ---- #
 
-if __name__ == '__main__':
 
+    # ---- ARGPARSE ---- #
     """Checks if a path is an actual file"""
     def is_file(pth):
         if not os.path.isfile(pth):
-            msg = "{0} is not a file".format(pth)
-            raise argparse.ArgumentTypeError(msg)
+            npth = os.path.join(feu.PTH_TEMP,pth)
+            if os.path.isfile(npth):
+                return os.path.abspath(os.path.realpath(os.path.expanduser(npth)))
+            else:
+                msg = "Given path is not a full file path, and was not found in the PTH_TEMP.\n{}".format(pth)
+                raise argparse.ArgumentTypeError(msg)
         else:
             return os.path.abspath(os.path.realpath(os.path.expanduser(pth)))
 
-    # create main parser
-
     parser = argparse.ArgumentParser()
-    parser.add_argument('zip_path', help="path at which to find a ZIP file containing images and Opossum log file.", type=is_file)
+    parser.add_argument('zip_path', help="path at which to find a ZIP file containing images and Opossum log file. Searches at PTH_TEMP defined in cfg file.", type=is_file)
     #parser.add_argument('destination_path', help="path at which to save resulting MP4", nargs='?', default=os.getcwd())
     args = parser.parse_args()
+    # ---- ARGPARSE ---- #
 
     pth_zip = os.path.abspath(args.zip_path)
     pth_dst = os.path.dirname(pth_zip)
