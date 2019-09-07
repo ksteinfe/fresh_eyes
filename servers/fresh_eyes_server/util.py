@@ -20,7 +20,7 @@ def load_config(section):
                 exit()
 
     except IOError:
-        print("Configuration file not found. Please create a config.ini file as described at https://github.com/ksteinfe/fresh_eyes")
+        print("Configuration file not found. Please create a config.ini file for the Fresh Eyes Servers as described at https://github.com/ksteinfe/fresh_eyes")
         exit()
 
     return cfg
