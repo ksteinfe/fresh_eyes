@@ -16,10 +16,17 @@ def main(pth_src):
         json.dump({'image':img_str}, fp)
 
 
-if __name__ == '__main__':
-    # create main parser
+if __name__ == '__main__' and __package__ is None:
+    # ---- FEUTIL ---- #
+    from os import sys, path
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__)))) # add grandparent folder to the module search path
+    import _fresh_eyes_script_utilities as feu # import fresh eyes fe_util
+    # ---- FEUTIL ---- #
+
+    # ---- ARGPARSE ---- #
     parser = argparse.ArgumentParser()
     parser.add_argument('src_path', help="path at which to find a single source image.")
     args = parser.parse_args()
-
+    # ---- ARGPARSE ---- #
+    
     main(args.src_path)

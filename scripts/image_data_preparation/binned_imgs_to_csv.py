@@ -25,11 +25,18 @@ def main(pth_src, dst_name):
 
     f.close()
 
-if __name__ == '__main__':
-    # create main parser
+if __name__ == '__main__' and __package__ is None:
+    # ---- FEUTIL ---- #
+    from os import sys, path
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__)))) # add grandparent folder to the module search path
+    import _fresh_eyes_script_utilities as feu # import fresh eyes fe_util
+    # ---- FEUTIL ---- #
+
+    # ---- ARGPARSE ---- #
     parser = argparse.ArgumentParser()
     parser.add_argument('src_path', help="path at which to find directories of source images. all JPG and PNG files will be processed.")
     parser.add_argument('dst_name', help="filename for the resulting CSV file. will be saved at the directory defined by src_path")
     args = parser.parse_args()
-
+    # ---- ARGPARSE ---- #
+    
     main(args.src_path, args.dst_name)

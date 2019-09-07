@@ -1,4 +1,6 @@
 import os, configparser
+import _fresh_eyes_script_utilities.files
+
 
 asci_eye = r"========== (o_o) Fresh Eyes =========="
 print(asci_eye)
@@ -27,7 +29,6 @@ def load_config(section="DEFAULT"):
         exit()
 
     return cfg
-
 
 # Do load the config file
 cfg = load_config()

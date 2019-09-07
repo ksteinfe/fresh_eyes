@@ -19,15 +19,19 @@ def crop_images(pth_src, pth_dst):
         img.crop(bx).save(sname.format(name))
     img.close()
 
+
+if __name__ == '__main__' and __package__ is None:
+    # ---- FEUTIL ---- #
+    from os import sys, path
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__)))) # add grandparent folder to the module search path
+    import _fresh_eyes_script_utilities as feu # import fresh eyes fe_util
+    # ---- FEUTIL ---- #
     
-if __name__ == '__main__':
-    # create main parser
+    # ---- ARGPARSE ---- #
     parser = argparse.ArgumentParser()
     parser.add_argument('source_path', help="path at which to find source images. all JPG and PNG files will be processed.")
     parser.add_argument('destination_path', help="path at which to save transformed images.")
     args = parser.parse_args()
-    
-    crop_images(args.source_path, args.destination_path)
-    
-    
+    # ---- ARGPARSE ---- #
 
+    crop_images(args.source_path, args.destination_path)
