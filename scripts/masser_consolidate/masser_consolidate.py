@@ -1,7 +1,7 @@
 import os, time, argparse
 
 DELETE_FILES = False
-img_ext = "png"
+img_ext = "jpg"
 mta_ext = "csv"
 
 def main(basepath, do_process_root=False):
@@ -10,7 +10,10 @@ def main(basepath, do_process_root=False):
 
     collected_metadata = []
     for root, dirs, files in walklevel(basepath):
-        if (not do_process_root) and (root == basepath): continue
+        print("processing {} files".format(len(files)))
+        if (not do_process_root) and (root == basepath):
+            print("Skipping root directory {}".format(root))
+            continue
         label = os.path.split(root)[1]
         for fnm_mta in files:
             bnm_mta, ext_mta = os.path.splitext(fnm_mta)
@@ -35,6 +38,10 @@ def main(basepath, do_process_root=False):
 
             collected_metadata.append(content+"\n")
             if (DELETE_FILES): os.remove(os.path.join(root,fnm_mta))
+
+    if len(collected_metadata)==0:
+        print("found no metadata")
+        return
 
     collected_metadata[-1] = collected_metadata[-1].strip()
     f = open(os.path.join(basepath,"_dataset.{}".format(mta_ext)), "w")
