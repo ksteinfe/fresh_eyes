@@ -6,8 +6,8 @@ import os, time
 
 
 #src_path = "C:\\Users\\ksteinfe\\Desktop\\TEST"
-src_path = r"C:\Users\kstei\Desktop\Sebastian"
-tar_path = r"C:\Users\kstei\Desktop\TEMP SEB"
+src_path = r"C:\Users\Matt\Desktop\House Massing 3dm\06 - BayGable"
+tar_path = r"C:\Users\Matt\Desktop\TEMP"
 disp_mode = "Arctic"
 cam_pos = (-1,-1,1)
 tar_pos = (0,0,0)

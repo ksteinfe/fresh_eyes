@@ -2,7 +2,7 @@ import rhinoscriptsyntax as rs
 import os, time
 
 def main():
-    basepath = r"C:\Users\kstei\Box\SG 2018 Sample Files for Participants\Datasets\House Types\3dm"
+    basepath = r"C:\Users\Matt\Desktop\House Massing 3dm\06 - BayGable"
     
     max_flrs = 99 # maximum number of folders to open
     max_fils = 99 # max number of files to open per folder
