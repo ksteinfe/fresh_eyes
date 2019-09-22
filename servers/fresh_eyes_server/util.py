@@ -28,10 +28,15 @@ def load_config(section):
 
 
 def save_temp_image(im):
-    #TODO: is the PNG format an issue here?
+
     if not os.path.exists(PTH_TMP): os.makedirs(PTH_TMP)
 
-    pth_im = os.path.join(PTH_TMP,"{}.jpg".format(str(uuid.uuid4())))
+    # Handle RGBA format if image is PNG, otherwise fallback to L mode (i.e., JPG)
+    if im.mode == "RGBA":
+        pth_im = os.path.join(PTH_TMP,"{}.png".format(str(uuid.uuid4())))
+    else:
+        pth_im = os.path.join(PTH_TMP,"{}.jpg".format(str(uuid.uuid4())))
+
     im.save(pth_im)
     return(pth_im)
 
