@@ -1,4 +1,5 @@
 import os, io, base64, tempfile, uuid, shutil, configparser
+from tensorflow.python.keras.applications.resnet50 import ResNet50, preprocess_input
 from PIL import Image
 
 # images recieved by API calls are saved locally, used for prediction, and then deleted
@@ -53,3 +54,6 @@ def chan_count_to_mode(nc):
 
 def clear_temp_path():
     shutil.rmtree(PTH_TMP)
+
+def get_resnet50(shape=(224, 224, 3)):
+    return ResNet50(weights='imagenet', include_top=False, input_shape=shape)

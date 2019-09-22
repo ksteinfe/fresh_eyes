@@ -40,8 +40,7 @@ def post_predict(pdict):
 def post_to_pred_simple(post_data, accept_non_images=False, enforced_image_size=False):
     # process any images that were passed
     # convert from base64 strings to PIL images, save to local temp directory
-    for key in post_data:
-        print(key)
+    #for key in post_data: print(key)
 
     data_dict = {}
     for key in post_data:
